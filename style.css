@@ -1,0 +1,87 @@
+body {
+    font-family: 'Baloo 2', cursive;
+}
+.bg-blue {
+background-color: #385A7C;
+}
+.navbar-brand {
+    padding-left: 35px;
+}
+.my-display {
+    text-align: center;
+    margin-top: 15px;
+    color: white;
+ }
+ .my-lead { 
+     color: white;
+}
+.my-h1 {
+    text-align: center;
+    color: #385A7C;
+    padding-top: 40px;
+    font-size: 36pt;
+}
+.instructions {
+    text-align: center;
+    font-size: 21pt;
+    color: #666666;
+}
+.zipCode {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 15px;
+}
+.card-row {
+    padding-top: 15px;
+}
+.card-width {
+    max-width: 300px;
+}
+.zip-button {
+    background-color: #385A7C;
+    color: white
+}
+.zip-button:hover {
+    background-color: #FE5F55;
+}
+.change-button {
+    background-color: #FE5F55;
+    color: white;
+    border: none;
+}
+.change-button:hover {
+    background-color: #8B0000;
+    color: white;
+    border: none;  
+}
+.change-button:active :focus {
+    background-color: #8B0000;
+    color: white;
+    border: none;  
+}
+.change-form {
+    padding-right: 35px;
+}
+.my-col {
+    margin-left: auto;
+    margin-right: auto;
+}
+.carousel-inner > .carousel-item {
+    height: 300px;
+ }
+ .pad-car {
+     padding-top: 40px;
+ }
+ .event-h1 {
+    text-align: center;
+    color: #385A7C;
+    padding-top: 20px;
+    font-size: 36pt;
+ }
+ .hide {
+     display: none;
+ }
+ .show {
+     display: contents;
+ }

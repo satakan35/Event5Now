@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
+    <script src="weather.js"></script>
+    <title>EVENT5 NOW</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-blue">
+        <a class="navbar-brand" href="#">
+            <img src="images\logo.png" height="30" alt="logo">
+        </a>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="my-h1">Let's Get Started!</h1>
+                <p class="instructions">Please enter your zip code to find music events near you.</p>
+                <hr>
+                <div class="input-group mb-3 zipCode">
+                    <input type="text" class="form-control" placeholder="Zip Code" aria-label="Recipient's username"
+                        aria-describedby="button-addon2" id="search">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary zip-button" type="button" id="button-addon2">Let's Go!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row card-row">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="images\WX_5-DAY_357x201.jpg" class="card-img-top" alt="weather">
+                    <div class="card-body">
+                        <p class="card-text">We use the most advanced doppler technology to determine when you should
+                            venture outside, and when to stay in and avoid the rain, snow and cold temperatures.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="images\image.jpg" class="card-img-top" alt="outdoor">
+                    <div class="card-body">
+                        <p class="card-text">So when the sun is shining, you'll get a list of outdoor music venues
+                            filled with your favorite artists. Including all your favorite genres and types of music.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <img src="images\MERea5fb37504adb9af490a501422d47_livestream0313.png" class="card-img-top"
+                        alt="online">
+                    <div class="card-body">
+                        <p class="card-text">Or maybe when that temperature is too cold or you just can't find your rain
+                            boots, we give you a list of available online and streaming music events.</p>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row card-row text-center hide" id="new-cards">
+        
+    </div>
+</body>
+
+</html>
