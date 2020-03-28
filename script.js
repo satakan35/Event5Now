@@ -8,26 +8,28 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET",
         }).then(function (data) {
-            for (i = 0; i < 5; i++) {
+            for (var i = 0; i < data.list.length; i += 8) {
+                var weatherTime = data.list[i].dt_txt;
+                    console.log(weatherTime.split(" ")[0]);
                 var col = $("<div>").addClass("col-md-2").attr("style", "margin: auto");
-                if(data.list[i].weather[0].main == "Clouds"){
-                var card = $("<div>").addClass("card bg-secondary");
+                if (data.list[i].weather[0].main == "Clouds") {
+                    var card = $("<div>").addClass("card bg-secondary");
                 }
-                else if(data.list[i].weather[0].main == "Rain"){
-                var card = $("<div>").addClass("card bg-primary");
+                else if (data.list[i].weather[0].main == "Rain") {
+                    var card = $("<div>").addClass("card bg-primary");
                 }
-                else{
-                var card = $("<div>").addClass("card bg-warning");
+                else {
+                    var card = $("<div>").addClass("card bg-warning");
                 }
-                var cardBody = $("<div>").addClass("card-body");
+                var cardBody = $("<div id='" + i + "-day'>").addClass("card-body");
                 var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png")
-                var day = moment().add(i, 'days').format("MMM Do YY");
-                var title = $("<h4>").addClass("card-title").text(day);
+                var title = $("<h4>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
                 var temp = $("<p>").addClass("card-text").text("Temp: " + Math.floor(data.list[i].main.temp_max) + " F")
                 col.append(card.append(cardBody.append(title, temp, img)));
-                $("#new-cards").append(col);  
+                $("#new-cards").append(col);
             }
-            getEvents();
+            console.log(data);
+             getEvents();
         });
     });
     function getEvents() {
@@ -36,17 +38,17 @@ $(document).ready(function () {
         var format = "YYYY-MM-DDTHH:mm:ss"
         var timerange = moment().format(format);
         var timerange2 = moment().add(5, "days").format(format);
-        var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?stateCode=OH&localStartDateTime=" + timerange + "," + timerange2 + "&size=100&sort=date,asc&apikey=" + apiKey;
+        var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?stateCode=OH&localStartDateTime=" + timerange + "t," + timerange2 + "&size=100&sort=date,asc&apikey=" + apiKey;
         $.ajax({
             url: queryURL,
             method: "GET",
         }).then(function (response) {
-            for (i = 0; i < response._embedded.events.length; i++) {
-                if (response._embedded.events[i].classifications[0].segment.name == "Music") {
+            for (var j = 0; j < response._embedded.events.length; j++) {
+                if (response._embedded.events[j].classifications[0].segment.name == "Music") {
                     var col = $("<div>").addClass("col-md-1").attr("style", "margin: auto");
                     var card = $("<div>").addClass("card bg-secondary");
                     var cardBody = $("<div>").addClass("card-body");
-                    var eventName = $("<li>").text(response._embedded.events[i].name + "--" + response._embedded.events[i].dates.start.localDate);
+                    var eventName = $("<li>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
                     col.append(card.append(cardBody.append(eventName)));
                     $("#events").append(col);
                 }
@@ -54,4 +56,17 @@ $(document).ready(function () {
             console.log(response);
         });
     };
+    $("#logo-button").click(function (event) {
+        $(".container").removeClass("hide");
+        $("#new-cards").addClass("hide");
+        $("#new-cards").empty();
+        $("#events").addClass("hide");
+        $("#events").empty();
+    })
 })
+
+
+// for(askdfj;.a)
+// getevent();
+// if (i % 8 === 0)
+// getWeather();
