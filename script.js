@@ -128,13 +128,5 @@ $(document).ready(function () {
         $(".container").removeClass("hide");
         $("#new-cards").addClass("hide");
         $("#new-cards").empty();
-        $("#events").addClass("hide");
-        $("#events").empty();
     })
 })
-
-
-// for(askdfj;.a)
-// getevent();
-// if (i % 8 === 0)
-// getWeather();
