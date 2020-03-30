@@ -36,23 +36,33 @@ $(document).ready(function () {
         var apiKey = "vvB0b99r8iknxkWR7GX7wfUP86byT2Xx"
         $("#events").removeClass("hide");
         var format = "YYYY-MM-DDTHH:mm:ss"
+        var search = $("#search").val().trim();
         var timerange = moment().format(format);
         var timerange2 = moment().add(5, "days").format(format);
-        var queryURL = "https://app.ticketmaster.com/discovery/v2/events.json?stateCode=OH&localStartDateTime=" + timerange + "t," + timerange2 + "&size=100&sort=date,asc&apikey=" + apiKey;
+        var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey="+ apiKey +"&postalCode=" + search + "&locale=*&startDateTime=" + timerange + "Z&classificationName=music"
         $.ajax({
             url: queryURL,
             method: "GET",
         }).then(function (response) {
+            console.log(response);
+            if (response.page.totalElements == 0){
+                console.log("There are no events for this location");
+                var col = $("<div>").addClass("col-lg-8").attr("style", "margin: auto");
+                var card = $("<div>").addClass("card bg-info");
+                var cardBody = $("<div>").addClass("card-body");
+                var eventName = $("<p>").text("Unfortunately, there are no events going on in this area! If the weather is gray, you should stay indoors, if yellow go party!");
+                col.append(card.append(cardBody.append(eventName)));
+                $("#events").append(col);
+            }
+            else{
             for (var j = 0; j < response._embedded.events.length; j++) {
-                if (response._embedded.events[j].classifications[0].segment.name == "Music") {
                     var col = $("<div>").addClass("col-md-1").attr("style", "margin: auto");
                     var card = $("<div>").addClass("card bg-secondary");
                     var cardBody = $("<div>").addClass("card-body");
                     var eventName = $("<li>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
                     col.append(card.append(cardBody.append(eventName)));
                     $("#events").append(col);
-                }
-            }
+            }}
             console.log(response);
         });
     };
