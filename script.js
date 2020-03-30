@@ -15,7 +15,7 @@ $(document).ready(function () {
             // for loop that goes through five days of forecast
             for (var i = 0; i < data.list.length; i += 8) {
                 var weatherTime = data.list[i].dt_txt;
-                    console.log(weatherTime.split(" ")[0]);
+                console.log(weatherTime.split(" ")[0]);
                 // Creating our cards and styling them
                 var col = $("<div>").addClass("col-md-2").attr("style", "margin: auto");
                 // checks if it is cloudy
@@ -25,7 +25,7 @@ $(document).ready(function () {
                 // checks if it is rainy
                 else if (data.list[i].weather[0].main == "Rain") {
                     var card = $("<div>").addClass("card bg-primary");
-                // else it is sunny
+                    // else it is sunny
                 }
                 else {
                     var card = $("<div>").addClass("card bg-warning");
@@ -39,7 +39,7 @@ $(document).ready(function () {
                 $("#new-cards").append(col);
             }
             // Calling the function to grab the events
-             getEvents();
+            getEvents();
         });
     });
     //function that grabs the events
@@ -55,14 +55,14 @@ $(document).ready(function () {
         // dynamically changing start time
         var timerange = moment().format(format);
         // our ticketmaster api query
-        var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey="+ apiKey +"&postalCode=" + search + "&locale=*&startDateTime=" + timerange + "Z&classificationName=music"
+        var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + apiKey + "&stateCode=OH&locale=*&startDateTime=" + timerange + "Z&classificationName=music&sort=date,asc"
         $.ajax({
             url: queryURL,
             method: "GET",
         }).then(function (response) {
             console.log(response);
             // checks to see if there are any events going on in the area
-            if (response.page.totalElements == 0){
+            if (response.page.totalElements == 0) {
                 console.log("There are no events for this location");
                 var col = $("<div>").addClass("col-lg-8").attr("style", "margin: auto");
                 var card = $("<div>").addClass("card bg-info");
@@ -72,16 +72,55 @@ $(document).ready(function () {
                 $("#events").append(col);
             }
             //if there are it plays through this else statement
-            else{
-            // a forloop that displays each event to a card with the event name and dates
-            for (var j = 0; j < response._embedded.events.length; j++) {
-                    var col = $("<div>").addClass("col-md-1").attr("style", "margin: auto");
-                    var card = $("<div>").addClass("card bg-secondary");
-                    var cardBody = $("<div>").addClass("card-body");
-                    var eventName = $("<li>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
-                    col.append(card.append(cardBody.append(eventName)));
-                    $("#events").append(col);
-            }}
+            else {
+                // a forloop that displays each event to a card with the event name and dates
+                for (var j = 0; j < response._embedded.events.length; j++) {
+                    //creating a switch statement to check which days events start on and then appending them to the specific card days
+                    //I went with a switch statement because it was easier than writing a bunch of else-ifs
+                    switch (response._embedded.events[j].dates.start.localDate) {
+                        //checks to see if the start date is today
+                        case moment().format("YYYY-MM-DD"):
+                            {
+                                //creating an "<p>" tag and adding text (name and date)
+                                var eventName = $("<p>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                //then we append that too the corresponding weathercard!
+                                $("#0-day").append(eventName);
+                                break;
+                            }
+                        //checks to see if the start date is one day after
+                        case moment().add(1, "days").format("YYYY-MM-DD"):
+                            {
+                                var eventName = $("<p>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                //since the loop for the weather has to jump 8 times per day for the forecast, we have to multiply our days by 8 to get
+                                //the correct day id!
+                                $("#8-day").append(eventName);
+                                break;
+                            }
+                        //checks to see if the start date is two days after
+                        case moment().add(2, "days").format("YYYY-MM-DD"):
+                            {
+                                var eventName = $("<p>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                $("#16-day").append(eventName);
+                                break;
+                            }
+                        //checks to see if the start date is three days after
+                        case moment().add(3, "days").format("YYYY-MM-DD"):
+                            {
+                                var eventName = $("<p>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                $("#24-day").append(eventName);
+                                break;
+                            }
+                        //checks to see if the start date is four days after
+                        //five days in total
+                        case moment().add(4, "days").format("YYYY-MM-DD"):
+                            {
+                                var eventName = $("<p>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                $("#32-day").append(eventName);
+                                break;
+                            }
+                    }
+                }
+            }
         });
     };
     // clicking the logo button will bring you back to the home screen while erasing everything out of the events and weather cards.
