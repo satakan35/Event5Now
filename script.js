@@ -1,26 +1,36 @@
 $(document).ready(function () {
-    $("#button-addon2").click(function (event) {
+    // The function that grabs the weather
+    $("#button-addon2").click(function () {
+        // hides the original landing page to display the new page
         $(".container").addClass("hide");
         $("#new-cards").removeClass("hide");
+        // grabs the input values
         var search = $("#search").val().trim();
+        // the openweathermap api url that inserts the user input into the zipcode field
         var queryURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + search + ",us&appid=aa550f330654aefb73397b4e69ec9a4c&units=imperial";
         $.ajax({
             url: queryURL,
             method: "GET",
         }).then(function (data) {
+            // for loop that goes through five days of forecast
             for (var i = 0; i < data.list.length; i += 8) {
                 var weatherTime = data.list[i].dt_txt;
                     console.log(weatherTime.split(" ")[0]);
+                // Creating our cards and styling them
                 var col = $("<div>").addClass("col-md-2").attr("style", "margin: auto");
+                // checks if it is cloudy
                 if (data.list[i].weather[0].main == "Clouds") {
                     var card = $("<div>").addClass("card bg-secondary");
                 }
+                // checks if it is rainy
                 else if (data.list[i].weather[0].main == "Rain") {
                     var card = $("<div>").addClass("card bg-primary");
+                // else it is sunny
                 }
                 else {
                     var card = $("<div>").addClass("card bg-warning");
                 }
+                // finishing creating our cards and then appending info onto them
                 var cardBody = $("<div id='" + i + "-day'>").addClass("card-body");
                 var img = $("<img>").attr("src", "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png")
                 var title = $("<h4>").addClass("card-title").text(new Date(data.list[i].dt_txt).toLocaleDateString());
@@ -28,23 +38,30 @@ $(document).ready(function () {
                 col.append(card.append(cardBody.append(title, temp, img)));
                 $("#new-cards").append(col);
             }
-            console.log(data);
+            // Calling the function to grab the events
              getEvents();
         });
     });
+    //function that grabs the events
     function getEvents() {
+        // our apikey for the ticketmaster api
         var apiKey = "vvB0b99r8iknxkWR7GX7wfUP86byT2Xx"
+        // shows our event div
         $("#events").removeClass("hide");
+        // creating a variable that stores our time format to better work with the ticketmaster api
         var format = "YYYY-MM-DDTHH:mm:ss"
+        // grabbing our input
         var search = $("#search").val().trim();
+        // dynamically changing start time
         var timerange = moment().format(format);
-        var timerange2 = moment().add(5, "days").format(format);
+        // our ticketmaster api query
         var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey="+ apiKey +"&postalCode=" + search + "&locale=*&startDateTime=" + timerange + "Z&classificationName=music"
         $.ajax({
             url: queryURL,
             method: "GET",
         }).then(function (response) {
             console.log(response);
+            // checks to see if there are any events going on in the area
             if (response.page.totalElements == 0){
                 console.log("There are no events for this location");
                 var col = $("<div>").addClass("col-lg-8").attr("style", "margin: auto");
@@ -54,7 +71,9 @@ $(document).ready(function () {
                 col.append(card.append(cardBody.append(eventName)));
                 $("#events").append(col);
             }
+            //if there are it plays through this else statement
             else{
+            // a forloop that displays each event to a card with the event name and dates
             for (var j = 0; j < response._embedded.events.length; j++) {
                     var col = $("<div>").addClass("col-md-1").attr("style", "margin: auto");
                     var card = $("<div>").addClass("card bg-secondary");
@@ -63,10 +82,10 @@ $(document).ready(function () {
                     col.append(card.append(cardBody.append(eventName)));
                     $("#events").append(col);
             }}
-            console.log(response);
         });
     };
-    $("#logo-button").click(function (event) {
+    // clicking the logo button will bring you back to the home screen while erasing everything out of the events and weather cards.
+    $("#logo-button").click(function () {
         $(".container").removeClass("hide");
         $("#new-cards").addClass("hide");
         $("#new-cards").empty();
