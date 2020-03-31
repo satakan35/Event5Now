@@ -12,10 +12,12 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET",
         }).then(function (data) {
+            console.log(data);
             // for loop that goes through five days of forecast
-            for (var i = 0; i < data.list.length; i += 8) {
+            for (var i = 0; i < data.list.length; i++) {
                 var weatherTime = data.list[i].dt_txt;
-                console.log(weatherTime.split(" ")[0]);
+                console.log(weatherTime);
+                if (weatherTime.indexOf("00:00:00") !== -1){
                 // Creating our cards and styling them
                 var col = $("<div>").addClass("col-md-2").attr("style", "margin: auto");
                 // checks if it is cloudy
@@ -37,6 +39,7 @@ $(document).ready(function () {
                 var temp = $("<p>").addClass("card-text").text("Temp: " + Math.floor(data.list[i].main.temp_max) + " F")
                 col.append(card.append(cardBody.append(title, temp, img)));
                 $("#new-cards").append(col);
+                }
             }
             // Calling the function to grab the events
             getEvents();
@@ -75,47 +78,55 @@ $(document).ready(function () {
             else {
                 // a forloop that displays each event to a card with the event name and dates
                 for (var j = 0; j < response._embedded.events.length; j++) {
+                    if (response._embedded.events[j].dates.status.code === "cancelled" || response._embedded.events[j].dates.status.code === "offsale") {
+                        continue
+                    }
                     //creating a switch statement to check which days events start on and then appending them to the specific card days
                     //I went with a switch statement because it was easier than writing a bunch of else-ifs
                     switch (response._embedded.events[j].dates.start.localDate) {
                         //checks to see if the start date is today
                         case moment().format("YYYY-MM-DD"):
                             {
-                                //creating an "<p>" tag and adding text (name and date)
-                                var eventName = $("<p>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                //creating an "<a>" and then making it open a new tab tag and adding text (name and date)
+                                var eventName = $("<p>");
+                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
                                 //then we append that too the corresponding weathercard!
-                                $("#0-day").append(eventName);
+                                $("#0-day").append(eventName.append(eventLink));
                                 break;
                             }
                         //checks to see if the start date is one day after
                         case moment().add(1, "days").format("YYYY-MM-DD"):
                             {
-                                var eventName = $("<p>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                var eventName =$("<p>");
+                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
                                 //since the loop for the weather has to jump 8 times per day for the forecast, we have to multiply our days by 8 to get
                                 //the correct day id!
-                                $("#8-day").append(eventName);
+                                $("#8-day").append(eventName.append(eventLink));
                                 break;
                             }
                         //checks to see if the start date is two days after
                         case moment().add(2, "days").format("YYYY-MM-DD"):
                             {
-                                var eventName = $("<p>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
-                                $("#16-day").append(eventName);
+                                var eventName =$("<p>");
+                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                $("#16-day").append(eventName.append(eventLink));
                                 break;
                             }
                         //checks to see if the start date is three days after
                         case moment().add(3, "days").format("YYYY-MM-DD"):
                             {
-                                var eventName = $("<p>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
-                                $("#24-day").append(eventName);
+                                var eventName =$("<p>");
+                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                $("#24-day").append(eventName.append(eventLink));
                                 break;
                             }
                         //checks to see if the start date is four days after
                         //five days in total
                         case moment().add(4, "days").format("YYYY-MM-DD"):
                             {
-                                var eventName = $("<p>").text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
-                                $("#32-day").append(eventName);
+                                var eventName =$("<p>");
+                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                $("#32-day").append(eventName.append(eventLink));
                                 break;
                             }
                     }
@@ -128,5 +139,6 @@ $(document).ready(function () {
         $(".container").removeClass("hide");
         $("#new-cards").addClass("hide");
         $("#new-cards").empty();
+        $(".form-control").val("");
     })
 })
