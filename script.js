@@ -89,7 +89,7 @@ $(document).ready(function () {
                             {
                                 //creating an "<a>" and then making it open a new tab tag and adding text (name and date)
                                 var eventName = $("<p>");
-                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name);
                                 //then we append that too the corresponding weathercard!
                                 $("#0-day").append(eventName.append(eventLink));
                                 break;
@@ -98,7 +98,7 @@ $(document).ready(function () {
                         case moment(timerange).add(1, "days").format("YYYY-MM-DD"):
                             {
                                 var eventName =$("<p>");
-                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name);
                                 //since the loop for the weather has to jump 8 times per day for the forecast, we have to multiply our days by 8 to get
                                 //the correct day id!
                                 $("#8-day").append(eventName.append(eventLink));
@@ -108,7 +108,7 @@ $(document).ready(function () {
                         case moment(timerange).add(2, "days").format("YYYY-MM-DD"):
                             {
                                 var eventName =$("<p>");
-                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name);
                                 $("#16-day").append(eventName.append(eventLink));
                                 break;
                             }
@@ -116,7 +116,7 @@ $(document).ready(function () {
                         case moment(timerange).add(3, "days").format("YYYY-MM-DD"):
                             {
                                 var eventName =$("<p>");
-                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name);
                                 $("#24-day").append(eventName.append(eventLink));
                                 break;
                             }
@@ -125,7 +125,7 @@ $(document).ready(function () {
                         case moment(timerange).add(4, "days").format("YYYY-MM-DD"):
                             {
                                 var eventName =$("<p>");
-                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
+                                var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name);
                                 $("#32-day").append(eventName.append(eventLink));
                                 break;
                             }

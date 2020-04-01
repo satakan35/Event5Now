@@ -1,5 +1,8 @@
 body {
     font-family: 'Baloo 2', cursive;
+    background-image: url("images/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 #new-cards a {
     font-weight: bolder;
@@ -93,13 +96,68 @@ background-color: #385A7C;
  .show {
      display: contents;
  }
- #container {
+​
+ /* css footer */
+  
+  #page-container {
     position: relative;
-    min-height: 80vh;
+    min-height: 100vh;
+    bottom: 0;
+      
   }
+  
+  #content-wrap {
+    padding-bottom: 2.5rem;    
+  }
+  
   #footer {
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     width: 100%;
-    text-align: center;
+    height: 2.5rem;
+    text-align: center; 
+    font-family: 'Shadows Into Light', cursive;          
+  }
+  /* navbar */
+  nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+   
+  }
+  nav li {
+    display: inline-block;
+    margin-left: 70px;
+    padding-top: 23px;
+  
+    position: relative;
+  }
+  
+  nav a {
+    color: rgb(255, 204, 0);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: 'Indie Flower';
+  }
+  
+  nav a:hover {
+    color: #000;
+  }
+  
+  nav a::before {
+    content: '';
+    display: block;
+    height: 5px;
+    background-color: #444;
+  
+    position: absolute;
+    top: 0;
+    width: 0%;
+  
+    transition: all ease-in-out 250ms;
+  }
+  
+  nav a:hover::before {
+    width: 100%;
   }

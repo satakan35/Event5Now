@@ -12,7 +12,10 @@
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
     <title>EVENT5 NOW</title>
 </head>
@@ -22,12 +25,20 @@
         <a class="navbar-brand" id="logo-button" href="#">
             <img src="images/logo.png" height="30" alt="logo">
         </a>
-        <div class="text-right about-us">
-        <a href="#">About Us</a>
-        <a href="#">Help Center</a>
-        <a href="#">Career Services</a>
-        <a href="#">Data</a>
-        </div>
+            <ul>
+                <li>
+                    <a href="images/IMG_2496.jpg">About Us</a>
+                 </li>
+                 <li>
+                     <a href="#">Help Center</a>
+                 </li>
+                 <li>
+                     <a href="#">Career Services</a>
+                 </li>
+                 <li>
+                     <a href="#">Data</a>
+                 </li>
+            </ul>
     </nav>
     <div class="container">
         <div class="row">
@@ -39,8 +50,7 @@
                     <input type="text" class="form-control" placeholder="Zip Code" aria-label="Recipient's username"
                         aria-describedby="button-addon2" id="search">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary zip-button" type="button" id="button-addon2">Let's
-                            Go!</button>
+                        <button class="btn btn-outline-secondary zip-button" type="button" id="button-addon2">Let's Go!</button>
                     </div>
                 </div>
             </div>
@@ -67,7 +77,8 @@
             </div>
             <div class="col">
                 <div class="card" style="width: 18rem;">
-                    <img src="images/indoor.jpg" class="card-img-top" alt="online">
+                    <img src="images/indoor.jpg" class="card-img-top"
+                        alt="online">
                     <div class="card-body">
                         <p class="card-text">Or maybe when that temperature is too cold or you just can't find your rain
                             boots, we give you a list of available online and streaming music events.</p>
@@ -77,16 +88,18 @@
             </div>
         </div>
     </div>
-    <div class="row card-row text-center hide" id="new-cards"></div>
-    <div class="row card-row text-center hide" id="events"></div>
-
-    <footer id="footer">
-        <h1><a href="#" class="fa fa-linkedin"></a>
+    <div class="row card-row text-center hide" id="new-cards"></div><br>
+    <div class="row hide"id="events"></div>
+    <!-- footer -->
+      <div id="page-container">
+        <div id="content-wrap"></div>
+        <footer id="footer">
+           <h1><a href="#" class="fa fa-linkedin"></a>
             <a href="#" class="fa fa-instagram"></a>
             <a href="#" class="fa fa-facebook"></a>
             <a href="#" class="fa fa-twitter"></a>
             <a href="#" class="fa fa-google"></a></h1>
-        <h5>&copy; Copyright 2020 <span style="color:green">Group 5</span> First Project </h5>
+        <span style="color:green"><h5>&copy; Copyright 2020 Group 5 First Project </h5></span>
     </footer>
     </div>
 </body>
