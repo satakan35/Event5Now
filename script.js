@@ -13,9 +13,10 @@ $(document).ready(function () {
             method: "GET",
         }).then(function (data) {
             console.log(data);
+            // making a variable that should be able to be called in an argument later on
+            var weatherTime = data.list[0].dt_txt;
             // for loop that goes through five days of forecast
             for (var i = 0; i < data.list.length; i += 8 ) {
-                var weatherTime = data.list[i].dt_txt;
                 console.log(weatherTime);
                 // Creating our cards and styling them
                 var col = $("<div>").addClass("col-md-2").attr("style", "margin: auto");
@@ -39,12 +40,12 @@ $(document).ready(function () {
                 col.append(card.append(cardBody.append(title, temp, img)));
                 $("#new-cards").append(col);
             }
-            // Calling the function to grab the events
-            getEvents();
+            // Calling the function to grab the events with what ever current timerange openweather is using
+            getEvents(weatherTime);
         });
     });
-    //function that grabs the events
-    function getEvents() {
+    //function that grabs the events and adding our time
+    function getEvents(weatherTime) {
         // our apikey for the ticketmaster api
         var apiKey = "vvB0b99r8iknxkWR7GX7wfUP86byT2Xx"
         // shows our event div
@@ -54,9 +55,9 @@ $(document).ready(function () {
         // grabbing our input
         var search = $("#search").val().trim();
         // dynamically changing start time
-        var timerange = moment().format(format);
+        var timerange = moment(weatherTime).format(format);
         // our ticketmaster api query
-        var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + apiKey + "&stateCode=OH&locale=*&startDateTime=" + timerange + "Z&classificationName=music&sort=date,asc"
+        var queryURL = "https://app.ticketmaster.com/discovery/v2/events?apikey=" + apiKey + "&stateCode=OH&locale=*&startDateTime=" + timerange + "Z&classificationName=music&sort=date,asc&size=30"
         $.ajax({
             url: queryURL,
             method: "GET",
@@ -74,8 +75,9 @@ $(document).ready(function () {
             }
             //if there are it plays through this else statement
             else {
-                // a forloop that displays each event to a card with the event name and dates
+                // a for loop that displays each event to a card with the event name and dates
                 for (var j = 0; j < response._embedded.events.length; j++) {
+                    // authenticating that events haven't been cancelled
                     if (response._embedded.events[j].dates.status.code === "cancelled" || response._embedded.events[j].dates.status.code === "offsale") {
                         continue
                     }
@@ -83,7 +85,7 @@ $(document).ready(function () {
                     //I went with a switch statement because it was easier than writing a bunch of else-ifs
                     switch (response._embedded.events[j].dates.start.localDate) {
                         //checks to see if the start date is today
-                        case moment().format("YYYY-MM-DD"):
+                        case moment(timerange).format("YYYY-MM-DD"):
                             {
                                 //creating an "<a>" and then making it open a new tab tag and adding text (name and date)
                                 var eventName = $("<p>");
@@ -93,7 +95,7 @@ $(document).ready(function () {
                                 break;
                             }
                         //checks to see if the start date is one day after
-                        case moment().add(1, "days").format("YYYY-MM-DD"):
+                        case moment(timerange).add(1, "days").format("YYYY-MM-DD"):
                             {
                                 var eventName =$("<p>");
                                 var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
@@ -103,7 +105,7 @@ $(document).ready(function () {
                                 break;
                             }
                         //checks to see if the start date is two days after
-                        case moment().add(2, "days").format("YYYY-MM-DD"):
+                        case moment(timerange).add(2, "days").format("YYYY-MM-DD"):
                             {
                                 var eventName =$("<p>");
                                 var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
@@ -111,7 +113,7 @@ $(document).ready(function () {
                                 break;
                             }
                         //checks to see if the start date is three days after
-                        case moment().add(3, "days").format("YYYY-MM-DD"):
+                        case moment(timerange).add(3, "days").format("YYYY-MM-DD"):
                             {
                                 var eventName =$("<p>");
                                 var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
@@ -120,7 +122,7 @@ $(document).ready(function () {
                             }
                         //checks to see if the start date is four days after
                         //five days in total
-                        case moment().add(4, "days").format("YYYY-MM-DD"):
+                        case moment(timerange).add(4, "days").format("YYYY-MM-DD"):
                             {
                                 var eventName =$("<p>");
                                 var eventLink = $("<a>").attr({"href": response._embedded.events[j].url, target: "_blank"}).text(response._embedded.events[j].name + "--" + response._embedded.events[j].dates.start.localDate);
@@ -132,7 +134,7 @@ $(document).ready(function () {
             }
         });
     };
-    // clicking the logo button will bring you back to the home screen while erasing everything out of the events and weather cards.
+    // clicking the logo button will bring you back to the home screen while erasing everything out of the events, weather cards, and input fields.
     $("#logo-button").click(function () {
         $(".container").removeClass("hide");
         $("#new-cards").addClass("hide");
