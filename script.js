@@ -134,7 +134,7 @@ $(document).ready(function () {
             }
         });
     };
-    // clicking the logo button will bring you back to the home screen while erasing everything out of the events, weather cards, and input fields.
+    // clicking the logo button will bring you back to the home screen while erasing everything out of the events, weather cards, and input.
     $("#logo-button").click(function () {
         $(".container").removeClass("hide");
         $("#new-cards").addClass("hide");
