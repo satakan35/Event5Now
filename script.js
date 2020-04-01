@@ -14,10 +14,9 @@ $(document).ready(function () {
         }).then(function (data) {
             console.log(data);
             // for loop that goes through five days of forecast
-            for (var i = 0; i < data.list.length; i++) {
+            for (var i = 0; i < data.list.length; i += 8 ) {
                 var weatherTime = data.list[i].dt_txt;
                 console.log(weatherTime);
-                if (weatherTime.indexOf("00:00:00") !== -1){
                 // Creating our cards and styling them
                 var col = $("<div>").addClass("col-md-2").attr("style", "margin: auto");
                 // checks if it is cloudy
@@ -39,7 +38,6 @@ $(document).ready(function () {
                 var temp = $("<p>").addClass("card-text").text("Temp: " + Math.floor(data.list[i].main.temp_max) + " F")
                 col.append(card.append(cardBody.append(title, temp, img)));
                 $("#new-cards").append(col);
-                }
             }
             // Calling the function to grab the events
             getEvents();
