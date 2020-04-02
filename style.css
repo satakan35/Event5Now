@@ -28,14 +28,16 @@ background-color: #385A7C;
 }
 .my-h1 {
     text-align: center;
-    color: #385A7C;
+    color: whitesmoke;
     padding-top: 40px;
     font-size: 36pt;
+    text-shadow: black 0px 0px 20px;
 }
 .instructions {
     text-align: center;
     font-size: 21pt;
-    color: #666666;
+    color: black;
+    text-shadow: white 0px 0px 10px;
 }
 .zipCode {
     max-width: 600px;
@@ -111,9 +113,8 @@ background-color: #385A7C;
   }
   
 #footer {
-    bottom: 0;
-    text-align: center; 
-    font-family: 'Shadows Into Light', cursive;          
+    color: white;
+    text-align: center;     
   }
   /* navbar */
 nav ul {
@@ -131,11 +132,10 @@ nav li {
   }
   
 nav a {
-    color: rgb(255, 204, 0);
+    color: whitesmoke;
     text-decoration: none;
     text-transform: uppercase;
     font-size: 14px;
-    font-family: 'Indie Flower';
   }
   
 nav a:hover {
@@ -202,3 +202,11 @@ body {
     max-height: 400px;  
   }
   /* end styling for youtube content */
+  .card {
+    min-height: 376px;
+    max-height: 376px;
+    }
+    .card-img-top {
+        min-height: 190px;
+        max-height: 190px;
+    }
