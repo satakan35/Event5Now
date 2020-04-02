@@ -16,9 +16,9 @@ $(document).ready(function () {
             // making a variable that should be able to be called in an argument later on
             var weatherTime = data.list[0].dt_txt;
             // for loop that goes through five days of forecast
-            if (data.list[0].weather[0].main == "Rain"){
+            //if (data.list[0].weather[0].main == "Rain"){
                 $("#youtube").removeClass("hide");
-            }
+            //}
             for (var i = 0; i < data.list.length; i += 8 ) {
                 console.log(weatherTime);
                 // Creating our cards and styling them
@@ -143,5 +143,6 @@ $(document).ready(function () {
         $("#new-cards").addClass("hide");
         $("#new-cards").empty();
         $(".form-control").val("");
+        $("#youtube").addClass("hide");
     })
 })
