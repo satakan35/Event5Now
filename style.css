@@ -99,18 +99,18 @@ background-color: #385A7C;
 ​
  /* css footer */
   
-  #page-container {
+#page-container {
     position: relative;
     min-height: 100vh;
     bottom: 0;
       
   }
   
-  #content-wrap {
+#content-wrap {
     padding-bottom: 2.5rem;    
   }
   
-  #footer {
+#footer {
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -119,13 +119,13 @@ background-color: #385A7C;
     font-family: 'Shadows Into Light', cursive;          
   }
   /* navbar */
-  nav ul {
+nav ul {
     margin: 0;
     padding: 0;
     list-style: none;
    
   }
-  nav li {
+nav li {
     display: inline-block;
     margin-left: 70px;
     padding-top: 23px;
@@ -133,7 +133,7 @@ background-color: #385A7C;
     position: relative;
   }
   
-  nav a {
+nav a {
     color: rgb(255, 204, 0);
     text-decoration: none;
     text-transform: uppercase;
@@ -141,11 +141,11 @@ background-color: #385A7C;
     font-family: 'Indie Flower';
   }
   
-  nav a:hover {
+nav a:hover {
     color: #000;
   }
   
-  nav a::before {
+nav a::before {
     content: '';
     display: block;
     height: 5px;
@@ -158,6 +158,50 @@ background-color: #385A7C;
     transition: all ease-in-out 250ms;
   }
   
-  nav a:hover::before {
+nav a:hover::before {
     width: 100%;
   }
+  /* styling for youtube content */
+body {
+    font-family: 'Baloo 2', cursive;
+  }
+  .youtube-row {
+    height: 380px;
+    background-color: rgb(238, 238, 245);
+  }
+  #preview-cards {
+    margin-top: 17px;
+    max-height: 350px;
+  }
+  #video{
+    padding-top: 32px;
+  }
+  article {
+    background-color: white;
+      display: flex;
+      align-items: center;
+      margin: 0 auto;
+      border-bottom: 1px solid rgb(221, 221, 221);
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+    article:hover{
+      border: 1px solid #385A7C
+    }
+  .thumb {
+      height: 70px;
+      border-radius: 4px;
+  }
+  .card-title{
+    font-size: 12pt;
+    font-weight: bold;
+  }
+  .details {
+      padding: 8px 22px;
+  }
+  .severe {
+    margin-left: auto;
+    margin-right: auto; 
+    max-height: 400px;  
+  }
+  /* end styling for youtube content */
